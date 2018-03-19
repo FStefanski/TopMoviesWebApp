@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
 
+/**
+ * 
+ * @author Frederik Stefanski
+ *
+ */
 @Controller
 @RequestMapping("/movie")
 public class MovieController {
@@ -30,6 +35,7 @@ public class MovieController {
 		// create model attribute to bind form data
 		Movie theMovie = new Movie();
 
+		// add empty movie attribute to the model
 		theModel.addAttribute("movie", theMovie);
 
 		return "movie-form";
@@ -59,10 +65,15 @@ public class MovieController {
 
 	/* CRUD: Update */
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(/* @RequestParam("movieId") int theId, Model theModel */) {
+	public String showFormForUpdate(@RequestParam("movieId") int theId, Model theModel) {
 
-		// TODO
+		// get the movie from the service
+		Movie theMovie = movieDAO.getMovie(theId);
 
+		// set movie as a model attribute to pre-populate the form
+		theModel.addAttribute("movie", theMovie);
+
+		// send over to our form
 		return "movie-form";
 	}
 
