@@ -37,4 +37,15 @@ public class MovieDAOImpl implements MovieDAO {
 		return movie;
 	}
 
+	@Transactional
+	@Override
+	public void saveCustomer(Movie theMovie) {
+
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// save the customer
+		currentSession.saveOrUpdate(theMovie);
+	}
+
 }

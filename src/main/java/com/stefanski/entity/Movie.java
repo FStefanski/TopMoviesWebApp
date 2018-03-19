@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "movie")
 public class Movie {
 
+	// 9 inputs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id") // name as in the db

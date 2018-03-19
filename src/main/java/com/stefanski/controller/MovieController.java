@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.stefanski.dao.MovieDAO;
@@ -22,9 +24,21 @@ public class MovieController {
 	/* CRUD template: create, read, update and delete */
 	/* CRUD: Create */
 	@GetMapping("/showFormForAdd")
-	public String showFormForAdd(/* @RequestParam("movieId") int theId */) {
+	public String showFormForAdd(Model theModel) {
 
-		// TODO
+		// create model attribute to bind form data
+		Movie theMovie = new Movie();
+
+		theModel.addAttribute("movie", theMovie);
+
+		return "movie-form";
+	}
+
+	@PostMapping("/saveMovie")
+	public String saveCustomer(@ModelAttribute("movie") Movie theMovie) {
+
+		// save the movie using dao
+		movieDAO.saveCustomer(theMovie);
 
 		return "redirect:/movie/list";
 	}
