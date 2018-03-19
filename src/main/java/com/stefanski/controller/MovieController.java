@@ -15,11 +15,21 @@ import com.stefanski.entity.Movie;
 @RequestMapping("/movie")
 public class MovieController {
 
-	// CustomerDAO will be used via CustomerServiceImplem
 	// need to inject the movie dao
 	@Autowired
 	private MovieDAO movieDAO;
 
+	/* CRUD template: create, read, update and delete */
+	/* CRUD: Create */
+	@GetMapping("/showFormForAdd")
+	public String showFormForAdd(/* @RequestParam("movieId") int theId */) {
+
+		// TODO
+
+		return "redirect:/movie/list";
+	}
+
+	/* CRUD: Read */
 	@GetMapping("/list") // only GET HTTP mapping
 	public String listMovies(Model theModel) {
 
@@ -32,6 +42,7 @@ public class MovieController {
 		return "list-movies";
 	}
 
+	/* CRUD: Update */
 	@GetMapping("/showFormForUpdate")
 	public String showFormForUpdate(/* @RequestParam("movieId") int theId, Model theModel */) {
 
@@ -40,6 +51,7 @@ public class MovieController {
 		return "movie-form";
 	}
 
+	/* CRUD: Delete */
 	@GetMapping("/delete")
 	public String dleteMovie(/* @RequestParam("movieId") int theId */) {
 

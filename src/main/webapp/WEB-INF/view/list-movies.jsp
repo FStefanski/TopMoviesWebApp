@@ -23,15 +23,16 @@
 	</div>
 
 	<div id="container">
-
 		<div id="content">
 
 			<!-- put new button: Add movie -->
+			<input type="button" value="Add Movie"
+				onclick="window.location.href='showFormForAdd'; return false;"
+				class="add-button" />
 
 			<!--  add a search box -->
 
 			<!--  add our html table here -->
-
 			<table>
 				<tr>
 					<th></th>
@@ -88,9 +89,7 @@
 			</table>
 
 		</div>
-
 	</div>
-
 
 </body>
 
