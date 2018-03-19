@@ -69,7 +69,7 @@
 						<td><form:input path="userRating" /></td>
 					</tr>
 					<tr>
-						<td><la bel>Want to watch?:</label></td>
+						<td><label>Want to watch?:</label></td>
 						<td><form:input path="wantToWatch" /></td>
 					</tr>
 					<tr>
