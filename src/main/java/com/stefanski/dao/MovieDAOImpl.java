@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import com.stefanski.entity.Movie;
 
+/**
+ * 
+ * @author Frederik Stefanski
+ *
+ */
 @Repository
 public class MovieDAOImpl implements MovieDAO {
 
@@ -46,6 +51,19 @@ public class MovieDAOImpl implements MovieDAO {
 
 		// save the customer
 		currentSession.saveOrUpdate(theMovie);
+	}
+
+	@Transactional
+	@Override
+	public Movie getMovie(int theId) {
+
+		// get the current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// new retrieve/read from database using the primary key
+		Movie theMovie = currentSession.get(Movie.class, theId);
+
+		return theMovie;
 	}
 
 	@Transactional

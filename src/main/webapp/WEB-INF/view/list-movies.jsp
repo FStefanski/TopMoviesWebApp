@@ -53,9 +53,9 @@
 				<c:forEach var="tempMovie" items="${movies}">
 					<!-- how to use JSTL tags https://www.tutorialspoint.com/jsp/jsp_standard_tag_library.htm -->
 
-					<!-- construct an "update" link with movie id -->
+					<!-- construct an "update" link with movie id and with filled item fields -->
 					<c:url var="updateLink" value="/movie/showFormForUpdate">
-
+						<c:param name="movieId" value="${tempMovie.id}" />
 					</c:url>
 
 					<!-- construct an "delete" link with movie id -->

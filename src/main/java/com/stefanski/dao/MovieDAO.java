@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.stefanski.entity.Movie;
 
+/**
+ * 
+ * @author Frederik Stefanski
+ *
+ */
 public interface MovieDAO {
 
 	List<Movie> getCustomers();
@@ -12,4 +17,5 @@ public interface MovieDAO {
 
 	void deleteMovie(int theId);
 
+	Movie getMovie(int theId);
 }
