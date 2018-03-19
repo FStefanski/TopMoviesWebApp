@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `movie`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS `top_movies_collection`.`movie` (
-  `movie_id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45)  DEFAULT NULL,
   `year` VARCHAR(45)  DEFAULT NULL,
   `genre` VARCHAR(45)  DEFAULT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `top_movies_collection`.`movie` (
   `imdb_rating` VARCHAR(45)  DEFAULT NULL,
   `user_rating` VARCHAR(45)  DEFAULT NULL,
   `want_to_watch` VARCHAR(45)  DEFAULT NULL,
-  PRIMARY KEY (`movie_id`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 --

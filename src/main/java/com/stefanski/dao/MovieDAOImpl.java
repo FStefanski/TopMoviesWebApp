@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +23,18 @@ public class MovieDAOImpl implements MovieDAO {
 	@Override
 	public List<Movie> getCustomers() {
 
-		return null;
+		// get the current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// create a query ... sort by
+		Query<Movie> theQuery = currentSession.createQuery("from Movie order by id", Movie.class);
+		// org.hibernate.query.Query hibernate 5.2
+
+		// execute query and get result list
+		List<Movie> movie = theQuery.getResultList();
+
+		// return the results
+		return movie;
 	}
 
 }

@@ -9,6 +9,8 @@
 <title>List movies</title>
 
 <!-- reference our style sheet -->
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/style.css" />
 
 </head>
 
@@ -32,7 +34,7 @@
 
 			<table>
 				<tr>
-					<th> </th>
+					<th></th>
 					<th>Title</th>
 					<th>Year</th>
 					<th>Genre</th>
@@ -41,29 +43,47 @@
 					<th>IMDB rating</th>
 					<th>User rating</th>
 					<th>Want to watch?</th>
+					<th>Options</th>
+					<th></th>
+					<th></th>
 				</tr>
 
 				<!-- loop over and print our movies -->
+				<c:forEach var="tempMovie" items="${movies}">
+					<!-- how to use JSTL tags https://www.tutorialspoint.com/jsp/jsp_standard_tag_library.htm -->
 
-				<!-- construct an "update" link with movie id -->
-				<c:url var="updateLink" value="/movie/showFormForUpdate">
-				</c:url>
+					<!-- construct an "update" link with movie id -->
+					<c:url var="updateLink" value="/movie/showFormForUpdate">
 
-				<!-- construct an "delete" link with movie id -->
-				<c:url var="deleteLink" value="/movie/delete">
-				</c:url>
+					</c:url>
 
-				<tr>
-					<%-- <td>${tempMovie.title}</td> --%>
+					<!-- construct an "delete" link with movie id -->
+					<c:url var="deleteLink" value="/movie/delete">
+
+					</c:url>
+
+					<tr>
+						<td>${tempMovie.id}</td>
+						<td>${tempMovie.title}</td>
+						<td>${tempMovie.year}</td>
+						<td>${tempMovie.genre}</td>
+						<td>${tempMovie.actors}</td>
+						<td>${tempMovie.directors}</td>
+						<td>${tempMovie.imdbRating}</td>
+						<td>${tempMovie.userRating}</td>
+						<td>${tempMovie.wantToWatch}</td>
 
 
-					<td>
-						<!-- display the update link --> <a href="${updateLink}">Update</a>
-						| <!-- display the delete link --> <a href="${deleteLink}">Delete</a>
-
-					</td>
-				</tr>
-
+						<td>
+							<!-- display the update link --> <a href="${updateLink}">Update</a>
+						</td>
+						<td>|</td>
+						<td>
+							<!-- display the delete link --> <a href="${deleteLink}"
+							onclick="if(!(confirm('Are tou sure you want to delete this movie?'))) return false">Delete</a>
+						</td>
+					</tr>
+				</c:forEach>
 
 			</table>
 
