@@ -60,7 +60,7 @@
 
 					<!-- construct an "delete" link with movie id -->
 					<c:url var="deleteLink" value="/movie/delete">
-
+						<c:param name="movieId" value="${tempMovie.id}" />
 					</c:url>
 
 					<tr>

@@ -39,13 +39,27 @@ public class MovieDAOImpl implements MovieDAO {
 
 	@Transactional
 	@Override
-	public void saveCustomer(Movie theMovie) {
+	public void saveMovie(Movie theMovie) {
 
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// save the customer
 		currentSession.saveOrUpdate(theMovie);
+	}
+
+	@Transactional
+	@Override
+	public void deleteMovie(int theId) {
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// delete object with primary key
+		Query theQuery = currentSession.createQuery("delete from Movie where id=:movieId");
+
+		theQuery.setParameter("movieId", theId);
+
+		theQuery.executeUpdate();
 	}
 
 }

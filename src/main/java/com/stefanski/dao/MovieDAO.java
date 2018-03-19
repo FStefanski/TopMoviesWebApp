@@ -8,6 +8,8 @@ public interface MovieDAO {
 
 	List<Movie> getCustomers();
 
-	void saveCustomer(Movie theMovie);
+	void saveMovie(Movie theMovie);
+
+	void deleteMovie(int theId);
 
 }

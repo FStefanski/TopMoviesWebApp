@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
@@ -38,7 +39,7 @@ public class MovieController {
 	public String saveCustomer(@ModelAttribute("movie") Movie theMovie) {
 
 		// save the movie using dao
-		movieDAO.saveCustomer(theMovie);
+		movieDAO.saveMovie(theMovie);
 
 		return "redirect:/movie/list";
 	}
@@ -67,9 +68,10 @@ public class MovieController {
 
 	/* CRUD: Delete */
 	@GetMapping("/delete")
-	public String dleteMovie(/* @RequestParam("movieId") int theId */) {
+	public String dleteMovie(@RequestParam("movieId") int theId) {
 
-		// TODO
+		// delete the movie using dao
+		movieDAO.deleteMovie(theId);
 
 		return "redirect:/movie/list";
 	}
