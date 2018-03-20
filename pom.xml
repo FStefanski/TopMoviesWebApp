@@ -4,7 +4,7 @@
 	<groupId>com.stefanski</groupId>
 	<artifactId>TopMoviesWebApp</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>TopMoviesWebApp Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
@@ -123,4 +123,5 @@
 				<version>2.2</version> <configuration> <path>/</path> </configuration> </plugin> -->
 		</plugins>
 	</build>
+	<description>Application whit implemented CRUD + search functionality.</description>
 </project>
