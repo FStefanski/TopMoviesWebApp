@@ -18,4 +18,6 @@ public interface MovieDAO {
 	void deleteMovie(int theId);
 
 	Movie getMovie(int theId);
+
+	List<Movie> searcMovies(String theSearchValue);
 }

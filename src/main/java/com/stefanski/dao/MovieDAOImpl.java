@@ -80,4 +80,37 @@ public class MovieDAOImpl implements MovieDAO {
 		theQuery.executeUpdate();
 	}
 
+	@Transactional
+	@Override
+	public List<Movie> searcMovies(String theSearchValue) {
+
+		// get the current hibernate session & set empty Query
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query theQuery = null;
+
+		// search only if theSearchValue is not empty
+		if (theSearchValue != null && theSearchValue.trim().length() > 0) {
+
+			// search thru all columns ... case insensitive
+			theQuery = currentSession.createQuery(
+					"from Movie where lower(title) like :theValue " + "or year like :theValue or genre like :theValue "
+							+ "or lower(actors) like :theValue or lower(directors) like :theValue "
+							+ "or imdbRating like :theValue or userRating like :theValue "
+							+ "or lower(wantToWatch) like :theValue " + "order by id",
+					Movie.class);
+
+			theQuery.setParameter("theValue", "%" + theSearchValue.toLowerCase() + "%");
+		} else {
+
+			// if theSearchValue is empty ... get all customers as in default list
+			theQuery = currentSession.createQuery("from Movie order by id", Movie.class);
+		}
+
+		// execute query and get result list
+		List<Movie> movies = theQuery.getResultList();
+
+		return movies;
+	}
+
 }

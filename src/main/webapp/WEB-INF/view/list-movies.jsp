@@ -24,13 +24,26 @@
 
 	<div id="container">
 		<div id="content">
-
-			<!-- put new button: Add movie -->
-			<input type="button" value="Add Movie"
-				onclick="window.location.href='showFormForAdd'; return false;"
-				class="add-button" />
-
-			<!--  add a search box -->
+			<table>
+				<tr></tr>
+				<tr>
+					<td>
+						<!-- put new button: Add movie --> 
+						<input type="button"
+							value="Add Movie"
+							onclick="window.location.href='showFormForAdd'; return false;"
+						class="add-button" />
+					</td>
+					<td>
+						<!--  add a search box --> 
+						<form:form action="search"
+							method="POST">
+            			    Search movie: <input type="text" name="theSearchValue" />
+							<input type="submit" value="Search" class="add-button" />
+						</form:form>
+					</td>
+				</tr>
+			</table>
 
 			<!--  add our html table here -->
 			<table>

@@ -86,4 +86,16 @@ public class MovieController {
 
 		return "redirect:/movie/list";
 	}
+
+	@PostMapping("/search")
+	public String searchCustomers(@RequestParam("theSearchValue") String theSearchValue, Model theModel) {
+
+		// search customers from the service
+		List<Movie> theMovies = movieDAO.searcMovies(theSearchValue);
+
+		// add the customers to the model
+		theModel.addAttribute("movies", theMovies);
+
+		return "list-movies";
+	}
 }
