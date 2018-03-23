@@ -54,6 +54,7 @@
 			<table>
 				<tr>
 					<th></th>
+					<th>Poster</th>
 					<th>Title</th>
 					<th>Year</th>
 					<th>Genre</th>
@@ -83,6 +84,7 @@
 
 					<tr>
 						<td>${tempMovie.id}</td>
+						<td><img SRC="${tempMovie.poster}" width="68" height="104"></td>
 						<td>${tempMovie.title}</td>
 						<td>${tempMovie.year}</td>
 						<td>${tempMovie.genre}</td>

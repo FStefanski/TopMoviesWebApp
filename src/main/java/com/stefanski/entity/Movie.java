@@ -20,6 +20,18 @@ public class Movie {
 	@Column(name = "id") // name as in the db
 	private int id;
 
+	public String getImdbID() {
+		return imdbID;
+	}
+
+	public void setImdbID(String imdbID) {
+		this.imdbID = imdbID;
+	}
+
+	@Column(name = "imdb_id")
+	@JsonProperty("imdbID")
+	private String imdbID;
+
 	@Column(name = "title")
 	@JsonProperty("Title")
 	private String title;
@@ -27,6 +39,14 @@ public class Movie {
 	@Column(name = "year")
 	@JsonProperty("Year")
 	private String year;
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 
 	@Column(name = "genre")
 	@JsonProperty("Genre")

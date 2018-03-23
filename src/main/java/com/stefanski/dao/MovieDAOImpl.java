@@ -87,10 +87,10 @@ public class MovieDAOImpl implements MovieDAO {
 				addedMoviesCounter++;
 
 			} else {
-				System.out.println("\n\t\t>> Movie: " + theSearchValue + " already exists!");
+				System.out.println("\t\t>> Movie: " + theSearchValue + " already exists!");
 			}
 		}
-		System.out.println("\n\t\t>> Added " + addedMoviesCounter + " of " + theMoviesList.size() + " movies");
+		System.out.println("\t>> Saved to data base " + addedMoviesCounter + " of " + theMoviesList.size() + " movies");
 	}
 
 	@Transactional
@@ -145,6 +145,30 @@ public class MovieDAOImpl implements MovieDAO {
 
 			// if theSearchValue is empty ... get all customers as in default list
 			theQuery = currentSession.createQuery("from Movie order by id", Movie.class);
+		}
+
+		// execute query and get result list
+		List<Movie> movies = theQuery.getResultList();
+
+		return movies;
+	}
+
+	@Transactional
+	@Override
+	public List<Movie> searcMoviesByImdbID(String movieId) {
+
+		// get the current hibernate session & set empty Query
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query theQuery = null;
+
+		// search only if movieId is not empty
+		if (movieId != null && movieId.trim().length() > 0) {
+
+			// search thru all columns ... case insensitive
+			theQuery = currentSession.createQuery("from Movie where lower(imdbID) like :theValue ", Movie.class);
+
+			theQuery.setParameter("theValue", "%" + movieId.toLowerCase() + "%");
 		}
 
 		// execute query and get result list

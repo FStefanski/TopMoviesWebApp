@@ -22,4 +22,6 @@ public interface MovieDAO {
 	Movie getMovie(int theId);
 
 	List<Movie> searcMovies(String theSearchValue);
+
+	List<Movie> searcMoviesByImdbID(String movieId);
 }

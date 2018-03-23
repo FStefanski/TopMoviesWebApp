@@ -98,7 +98,7 @@ public class MovieController {
 		// add the Movies to the model
 		theModel.addAttribute("movies", theMovies);
 
-		return "list-movies";
+		return "redirect:/movie/list";
 	}
 
 	/* Download top movies list & data */
@@ -112,19 +112,13 @@ public class MovieController {
 	@GetMapping("/fetchTopMovieList") // only GET HTTP mapping
 	public String fetchTopMovieListFromServer(Model theModel) {
 
-		// parse the top movie list web site for actual list with moeies ids
+		// parse the top movie list web site for actual list with movies ids
 		List<String> theMoviesIDList = topMoviesIdFinder.findAllTopMoviesId();
 
 		// use the fetched id list to consume a 3rd party REST server and fetch the
 		// movies details & save the movies using dao
 		movieDAO.saveAllMovies(movieClient.fetchAllMovies(theMoviesIDList));
 
-		// get Movie dao directly
-		List<Movie> theMovies = movieDAO.getMovies();
-
-		// add the movies to the model attribute - model binding for view form/tags
-		theModel.addAttribute("movies", theMovies);
-
-		return "list-movies";
+		return "redirect:/movie/list";
 	}
 }

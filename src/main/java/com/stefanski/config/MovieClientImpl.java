@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
 
 @Component
@@ -19,6 +20,9 @@ public class MovieClientImpl implements MovieClient {
 
 	@Autowired
 	RestTemplate restTemplate = new RestTemplate();
+	// need to inject the movie dao
+	@Autowired
+	private MovieDAO movieDAO;
 
 	/* GET */
 	@Override
@@ -29,26 +33,39 @@ public class MovieClientImpl implements MovieClient {
 
 		// movies fetched counter
 		int moviesFetchedCounter = 0;
+		// REST server limitations counter
+		int RESTServerLimitatCounter = 20;
 
 		for (String movieId : topMoviesIdList) {
 
-			movie = restTemplate.getForObject(REST_SERVICE_URI + "{id}", Movie.class, movieId);
-			System.out.println(movie.toString());
-			topMoviesList.add(movie);
+			// restrain the number of downloaded movies - REST server limitations
+			if (--RESTServerLimitatCounter > 0) {
 
-			if (moviesFetchedCounter == 10) {
-				break;
-			} else {
-				moviesFetchedCounter++;
-				try {
-					TimeUnit.MILLISECONDS.sleep(500);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				// download only if the movie doesn't exists in data base - checked by imdbID,
+				// e.g. "tt0111161"
+				if (movieDAO.searcMoviesByImdbID(movieId).isEmpty()) {
+
+					movie = restTemplate.getForObject(REST_SERVICE_URI + "{id}", Movie.class, movieId);
+					System.out.println(movie.toString());
+					topMoviesList.add(movie);
+					moviesFetchedCounter++;
+
+					try {
+						TimeUnit.MILLISECONDS.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				} else {
+					System.out.println("\t\t>> Movie: " + movieId + " already exists!");
 				}
+
+			} else {
+
+				break;
 			}
 		}
-		System.out.println("\n\t\t>> Added " + moviesFetchedCounter + " of " + topMoviesIdList.size() + " movies");
-
+		System.out.println("\t>> Added " + moviesFetchedCounter + " of " + topMoviesIdList.size() + " movies");
 		return topMoviesList;
 	}
 
