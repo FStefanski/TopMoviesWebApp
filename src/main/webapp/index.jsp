@@ -1,4 +1,10 @@
-<html>
+<!-- redirect to List view -->
+<%
+	response.sendRedirect("movie/list");
+%>
+
+
+<%-- <html>
 <body>
 	<h2>Top 100 Greatest Movies of All Time (The Ultimate List) -
 		index!</h2>
@@ -19,3 +25,4 @@
 	</p>
 </div>
 </html>
+ --%>

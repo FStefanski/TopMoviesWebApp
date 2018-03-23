@@ -11,9 +11,11 @@ import com.stefanski.entity.Movie;
  */
 public interface MovieDAO {
 
-	List<Movie> getCustomers();
+	List<Movie> getMovies();
 
 	void saveMovie(Movie theMovie);
+
+	void saveAllMovies(List<Movie> theMoviesList);
 
 	void deleteMovie(int theId);
 

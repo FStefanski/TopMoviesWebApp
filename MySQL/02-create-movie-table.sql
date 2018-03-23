@@ -23,12 +23,13 @@ DROP TABLE IF EXISTS `movie`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS `top_movies_collection`.`movie` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(45)  DEFAULT NULL,
+  `title` VARCHAR(255)  DEFAULT NULL,
   `year` VARCHAR(45)  DEFAULT NULL,
-  `genre` VARCHAR(45)  DEFAULT NULL,
+  `genre` VARCHAR(255)  DEFAULT NULL,
   `actors` VARCHAR(255)  DEFAULT NULL,
   `directors` VARCHAR(45)  DEFAULT NULL,
   `imdb_rating` VARCHAR(45)  DEFAULT NULL,
+  `poster` VARCHAR(255)  DEFAULT NULL,
   `user_rating` VARCHAR(45)  DEFAULT NULL,
   `want_to_watch` VARCHAR(45)  DEFAULT NULL,
   PRIMARY KEY (`id`))
@@ -41,10 +42,11 @@ ENGINE = InnoDB;
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
 
-INSERT INTO `movie` VALUES 
+/* INSERT INTO `movie` VALUES 
 	(1,'The Godfather','1972','Crime, Drama','Marlon Brando, Al Pacino, James Caan, Diane Keaton','Francis Ford Coppola','9.2',null, null),
 	(2,'The Shawshank Redemption','1994','Crime, Drama','Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler','Frank Darabont','9.3',null, null),
 	(3,'Schindler\'s List','1993','Biography, Drama, History','Liam Neeson, Ralph Fiennes, Ben Kingsley, Caroline Goodall','Steven Spielberg','8.9',null, null);
+*/
 
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;

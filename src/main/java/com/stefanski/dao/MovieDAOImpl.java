@@ -26,7 +26,7 @@ public class MovieDAOImpl implements MovieDAO {
 
 	@Transactional
 	@Override
-	public List<Movie> getCustomers() {
+	public List<Movie> getMovies() {
 
 		// get the current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
@@ -51,6 +51,46 @@ public class MovieDAOImpl implements MovieDAO {
 
 		// save the customer
 		currentSession.saveOrUpdate(theMovie);
+	}
+
+	@Transactional
+	@Override
+	public void saveAllMovies(List<Movie> theMoviesList) {
+
+		// get current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// added movies caounter
+		int addedMoviesCounter = 0;
+		// save only if the title doesn't exists
+		String theSearchValue = null;
+		// set empty Query
+		Query theQuery = null;
+
+		for (Movie movie : theMoviesList) {
+
+			// save only if the title doesn't exists
+			theSearchValue = movie.getTitle();
+
+			// set empty Query
+			theQuery = null;
+
+			// search thru title column ... case insensitive
+			theQuery = currentSession.createQuery("from Movie where lower(title) like :theValue", Movie.class);
+
+			theQuery.setParameter("theValue", "%" + theSearchValue.toLowerCase() + "%");
+
+			if (theQuery.getResultList().isEmpty()) {
+				// save the customer
+				currentSession.saveOrUpdate(movie);
+
+				addedMoviesCounter++;
+
+			} else {
+				System.out.println("\n\t\t>> Movie: " + theSearchValue + " already exists!");
+			}
+		}
+		System.out.println("\n\t\t>> Added " + addedMoviesCounter + " of " + theMoviesList.size() + " movies");
 	}
 
 	@Transactional
