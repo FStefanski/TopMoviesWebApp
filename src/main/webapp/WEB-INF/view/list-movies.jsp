@@ -18,7 +18,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>Top 100 Greatest Movies of All Time (The Ultimate List)</h2>
+			<h2>Top Rated Movies - Top 250 as rated by IMDb Users</h2>
 		</div>
 	</div>
 
@@ -28,19 +28,24 @@
 				<tr></tr>
 				<tr>
 					<td>
-						<!-- put new button: Add movie --> 
-						<input type="button"
-							value="Add Movie"
-							onclick="window.location.href='showFormForAdd'; return false;"
+						<!-- put new button: Add movie --> <input type="button"
+						value="Add Movie"
+						onclick="window.location.href='showFormForAdd'; return false;"
 						class="add-button" />
 					</td>
 					<td>
-						<!--  add a search box --> 
-						<form:form action="search"
+						<!--  add a search box --> <form:form action="search"
 							method="POST">
-            			    Search movie: <input type="text" name="theSearchValue" />
+            			    Search movie: <input type="text"
+								name="theSearchValue" />
 							<input type="submit" value="Search" class="add-button" />
 						</form:form>
+					</td>
+					<td>
+						<!--  put new button: download top movies list & data --> <input
+						type="button" value="Fetch movies list from server"
+						onclick="window.location.href='fetchTopMovieList'; return false;"
+						class="add-button2" />
 					</td>
 				</tr>
 			</table>
@@ -49,6 +54,7 @@
 			<table>
 				<tr>
 					<th></th>
+					<th>Poster</th>
 					<th>Title</th>
 					<th>Year</th>
 					<th>Genre</th>
@@ -78,6 +84,7 @@
 
 					<tr>
 						<td>${tempMovie.id}</td>
+						<td><img SRC="${tempMovie.poster}" width="68" height="104"></td>
 						<td>${tempMovie.title}</td>
 						<td>${tempMovie.year}</td>
 						<td>${tempMovie.genre}</td>

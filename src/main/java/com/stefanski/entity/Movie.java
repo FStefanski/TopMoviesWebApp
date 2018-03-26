@@ -7,33 +7,66 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "movie")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
-
 	// 9 inputs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id") // name as in the db
 	private int id;
 
+	public String getImdbID() {
+		return imdbID;
+	}
+
+	public void setImdbID(String imdbID) {
+		this.imdbID = imdbID;
+	}
+
+	@Column(name = "imdb_id")
+	@JsonProperty("imdbID")
+	private String imdbID;
+
 	@Column(name = "title")
+	@JsonProperty("Title")
 	private String title;
 
 	@Column(name = "year")
+	@JsonProperty("Year")
 	private String year;
 
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
 	@Column(name = "genre")
+	@JsonProperty("Genre")
 	private String genre;
 
 	@Column(name = "actors")
+	@JsonProperty("Actors")
 	private String actors;
 
 	@Column(name = "directors")
+	@JsonProperty("Director")
 	private String directors;
 
 	@Column(name = "imdb_rating")
+	@JsonProperty("imdbRating")
 	private String imdbRating;
+
+	@Column(name = "poster")
+	@JsonProperty("Poster")
+	private String poster;
 
 	@Column(name = "user_rating")
 	private String userRating;
@@ -58,16 +91,16 @@ public class Movie {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTitle(String Title) {
+		this.title = Title;
 	}
 
 	public String getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setYear(String Year) {
+		this.year = Year;
 	}
 
 	public String getGenre() {

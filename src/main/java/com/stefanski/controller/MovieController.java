@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.stefanski.bgjobs.TopMoviesIdFinder;
+import com.stefanski.config.MovieRESTClient;
 import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
 
@@ -42,7 +44,7 @@ public class MovieController {
 	}
 
 	@PostMapping("/saveMovie")
-	public String saveCustomer(@ModelAttribute("movie") Movie theMovie) {
+	public String saveMovie(@ModelAttribute("movie") Movie theMovie) {
 
 		// save the movie using dao
 		movieDAO.saveMovie(theMovie);
@@ -54,8 +56,8 @@ public class MovieController {
 	@GetMapping("/list") // only GET HTTP mapping
 	public String listMovies(Model theModel) {
 
-		// get customer dao directly
-		List<Movie> theMovies = movieDAO.getCustomers();
+		// get Movie dao directly
+		List<Movie> theMovies = movieDAO.getMovies();
 
 		// add the movies to the model attribute - model binding for view form/tags
 		theModel.addAttribute("movies", theMovies); // use the same name in view form/tags
@@ -88,14 +90,35 @@ public class MovieController {
 	}
 
 	@PostMapping("/search")
-	public String searchCustomers(@RequestParam("theSearchValue") String theSearchValue, Model theModel) {
+	public String searchMovies(@RequestParam("theSearchValue") String theSearchValue, Model theModel) {
 
-		// search customers from the service
+		// search Movies from the service
 		List<Movie> theMovies = movieDAO.searcMovies(theSearchValue);
 
-		// add the customers to the model
+		// add the Movies to the model
 		theModel.addAttribute("movies", theMovies);
 
-		return "list-movies";
+		return "redirect:/movie/list";
+	}
+
+	/* Download top movies list & data */
+
+	// need to inject the movie finder
+	@Autowired
+	private TopMoviesIdFinder topMoviesIdFinder;
+	@Autowired
+	private MovieRESTClient movieRESTClient;
+
+	@GetMapping("/fetchTopMovieList") // only GET HTTP mapping
+	public String fetchTopMovieListFromServer(Model theModel) {
+
+		// parse the top movie list web site for actual list with movies ids
+		List<String> theMoviesIDList = topMoviesIdFinder.findAllTopMoviesId();
+
+		// use the fetched id list to consume a 3rd party REST server and fetch the
+		// movies details & save the movies using dao
+		movieDAO.saveAllMovies(movieRESTClient.fetchAllMovies(theMoviesIDList));
+
+		return "redirect:/movie/list";
 	}
 }

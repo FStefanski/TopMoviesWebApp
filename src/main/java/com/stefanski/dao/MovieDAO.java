@@ -11,13 +11,17 @@ import com.stefanski.entity.Movie;
  */
 public interface MovieDAO {
 
-	List<Movie> getCustomers();
+	List<Movie> getMovies();
 
 	void saveMovie(Movie theMovie);
+
+	void saveAllMovies(List<Movie> theMoviesList);
 
 	void deleteMovie(int theId);
 
 	Movie getMovie(int theId);
 
 	List<Movie> searcMovies(String theSearchValue);
+
+	List<Movie> searcMoviesByImdbID(String movieId);
 }

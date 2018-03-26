@@ -47,3 +47,16 @@ tr:nth-child(odd) {background: #BBBBBB}
 	margin-bottom: 15px;
 	background: #cccccc;
 }
+
+.add-button2 {
+	border: 3px solid #900; 
+	border-radius: 5px; 
+	padding: 4px; 
+	font-size: 12px;
+	font-weight: normal;
+	width: 180px; 
+	padding: 5px 10px; 
+	
+	margin-bottom: 15px;
+	background: #cccccc;
+}
