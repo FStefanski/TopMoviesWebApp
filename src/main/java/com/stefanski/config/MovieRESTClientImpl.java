@@ -12,7 +12,7 @@ import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
 
 @Component
-public class MovieClientImpl implements MovieClient {
+public class MovieRESTClientImpl implements MovieRESTClient {
 
 	/* Consuming REST service */
 	public static final String API_KEY = "115fc92c";
@@ -34,7 +34,7 @@ public class MovieClientImpl implements MovieClient {
 		// movies fetched counter
 		int moviesFetchedCounter = 0;
 		// REST server limitations counter
-		int RESTServerLimitatCounter = 20;
+		int RESTServerLimitatCounter = 100;
 
 		for (String movieId : topMoviesIdList) {
 
@@ -45,8 +45,8 @@ public class MovieClientImpl implements MovieClient {
 				// e.g. "tt0111161"
 				if (movieDAO.searcMoviesByImdbID(movieId).isEmpty()) {
 
+					System.out.println("\t\t>> Downloading movie: " + movieId + " ...");
 					movie = restTemplate.getForObject(REST_SERVICE_URI + "{id}", Movie.class, movieId);
-					System.out.println(movie.toString());
 					topMoviesList.add(movie);
 					moviesFetchedCounter++;
 

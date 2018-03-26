@@ -18,7 +18,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>Top 100 Greatest Movies of All Time (The Ultimate List)</h2>
+			<h2>Top Rated Movies - Top 250 as rated by IMDb Users</h2>
 		</div>
 	</div>
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stefanski.bgjobs.TopMoviesIdFinder;
-import com.stefanski.config.MovieClient;
+import com.stefanski.config.MovieRESTClient;
 import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
 
@@ -107,7 +107,7 @@ public class MovieController {
 	@Autowired
 	private TopMoviesIdFinder topMoviesIdFinder;
 	@Autowired
-	private MovieClient movieClient;
+	private MovieRESTClient movieRESTClient;
 
 	@GetMapping("/fetchTopMovieList") // only GET HTTP mapping
 	public String fetchTopMovieListFromServer(Model theModel) {
@@ -117,7 +117,7 @@ public class MovieController {
 
 		// use the fetched id list to consume a 3rd party REST server and fetch the
 		// movies details & save the movies using dao
-		movieDAO.saveAllMovies(movieClient.fetchAllMovies(theMoviesIDList));
+		movieDAO.saveAllMovies(movieRESTClient.fetchAllMovies(theMoviesIDList));
 
 		return "redirect:/movie/list";
 	}
