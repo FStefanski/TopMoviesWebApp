@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +36,12 @@ public class MovieRESTServiceImpl implements MovieRESTService {
 		return topMoviesIdFinder.findAllTopMovies();
 	}
 
+	@Transactional // defining transactions at Service layer
 	@Override
 	public void fetchAndSaveAllMoviesOneByOne(Map<Integer, String> topMoviesMap) {
 
 		topMoviesMap.forEach(
 				(imdbPosition, imdbID) -> movieDAO.saveMovie(movieRESTClient.fetchMovieById(imdbPosition, imdbID)));
-
 	}
 
 	@Override
@@ -48,6 +50,7 @@ public class MovieRESTServiceImpl implements MovieRESTService {
 		return movieRESTClient.fetchAllMovies(theMoviesIDList);
 	}
 
+	@Transactional // defining transactions at Service layer
 	@Override
 	public void saveAllMovies(List<Movie> theMoviesList) {
 

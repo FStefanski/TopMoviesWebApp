@@ -55,7 +55,7 @@ public class MovieDAOImpl implements MovieDAO {
 		}
 	}
 
-	@Transactional
+	// @Transactional // moved to MovieService
 	@Override
 	public void saveAllMovies(List<Movie> theMoviesList) {
 
@@ -95,7 +95,7 @@ public class MovieDAOImpl implements MovieDAO {
 		System.out.println("\t>> Saved to data base " + addedMoviesCounter + " of " + theMoviesList.size() + " movies");
 	}
 
-	@Transactional
+	// @Transactional // moved to MovieService
 	@Override
 	public Movie getMovie(int theId) {
 
@@ -108,7 +108,7 @@ public class MovieDAOImpl implements MovieDAO {
 		return theMovie;
 	}
 
-	@Transactional
+	// @Transactional // moved to MovieService
 	@Override
 	public void deleteMovie(int theId) {
 		// get current hibernate session
@@ -122,7 +122,7 @@ public class MovieDAOImpl implements MovieDAO {
 		theQuery.executeUpdate();
 	}
 
-	@Transactional
+	// @Transactional // moved to MovieService
 	@Override
 	public List<Movie> searchMovies(String theSearchedValue) {
 
@@ -155,7 +155,7 @@ public class MovieDAOImpl implements MovieDAO {
 		return movies;
 	}
 
-	@Transactional
+	// @Transactional // moved to MovieService
 	@Override
 	public List<Movie> searchMoviesByImdbID(String movieId) {
 		// get the current hibernate session & set empty Query
