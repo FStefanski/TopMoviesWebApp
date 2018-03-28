@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
+import com.stefanski.service.MovieService;
 
 /**
  * 
@@ -23,9 +24,9 @@ import com.stefanski.entity.Movie;
 @RequestMapping("/movie")
 public class MovieController {
 
-	// need to inject the movie dao
+	// need to inject the movie Service
 	@Autowired
-	private MovieDAO movieDAO;
+	private MovieService movieService;
 
 	/* CRUD template: create, read, update and delete */
 	/* CRUD: Create */
@@ -45,7 +46,7 @@ public class MovieController {
 	public String saveMovie(@ModelAttribute("movie") Movie theMovie) {
 
 		// save the movie using dao
-		movieDAO.saveMovie(theMovie);
+		movieService.saveMovie(theMovie);
 
 		return "redirect:/movie/list";
 	}
@@ -55,7 +56,7 @@ public class MovieController {
 	public String listMovies(Model theModel) {
 
 		// get Movie dao directly
-		List<Movie> theMovies = movieDAO.getMovies();
+		List<Movie> theMovies = movieService.getMovies();
 
 		// add the movies to the model attribute - model binding for view form/tags
 		theModel.addAttribute("movies", theMovies); // use the same name in view form/tags
@@ -68,7 +69,7 @@ public class MovieController {
 	public String showFormForUpdate(@RequestParam("movieId") int theId, Model theModel) {
 
 		// get the movie from the service
-		Movie theMovie = movieDAO.getMovie(theId);
+		Movie theMovie = movieService.getMovie(theId);
 
 		// set movie as a model attribute to pre-populate the form
 		theModel.addAttribute("movie", theMovie);
@@ -82,41 +83,22 @@ public class MovieController {
 	public String dleteMovie(@RequestParam("movieId") int theId) {
 
 		// delete the movie using dao
-		movieDAO.deleteMovie(theId);
+		movieService.deleteMovie(theId);
 
 		return "redirect:/movie/list";
 	}
 
 	@PostMapping("/search")
-	public String searchMovies(@RequestParam("theSearchValue") String theSearchValue, Model theModel) {
+	public String searchMovies(@RequestParam("theSearchedValue") String theSearchedValue, Model theModel) {
 
 		// search Movies from the service
-		List<Movie> theMovies = movieDAO.searcMovies(theSearchValue);
+		List<Movie> theMovies = movieService.searchMovies(theSearchedValue);
 
 		// add the Movies to the model
 		theModel.addAttribute("movies", theMovies);
-
-		return "redirect:/movie/list";
+		return "list-movies";
 	}
 
 	/* Download top movies list & data */
-	// Moved to a independent Controller
-	// // need to inject the movie finder
-	// @Autowired
-	// private TopMoviesIdFinder topMoviesIdFinder;
-	// @Autowired
-	// private MovieRESTClient movieRESTClient;
-	//
-	// @GetMapping("/fetchTopMovieList") // only GET HTTP mapping
-	// public String fetchTopMovieListFromServer(Model theModel) {
-	//
-	// // parse the top movie list web site for actual list with movies ids
-	// List<String> theMoviesIDList = topMoviesIdFinder.findAllTopMoviesId();
-	//
-	// // use the fetched id list to consume a 3rd party REST server and fetch the
-	// // movies details & save the movies using dao
-	// movieDAO.saveAllMovies(movieRESTClient.fetchAllMovies(theMoviesIDList));
-	//
-	// return "redirect:/movie/list";
-	// }
+	// Moved to a independent FetchMovieController
 }

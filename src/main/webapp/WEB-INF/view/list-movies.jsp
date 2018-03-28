@@ -37,7 +37,7 @@
 						<!--  add a search box --> <form:form action="search"
 							method="POST">
             			    Search movie: <input type="text"
-								name="theSearchValue" />
+								name="theSearchedValue" />
 							<input type="submit" value="Search" class="add-button" />
 						</form:form>
 					</td>

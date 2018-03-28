@@ -21,7 +21,7 @@ public interface MovieService {
 
 	Movie getMovie(int theId);
 
-	List<Movie> searcMovies(String theSearchedValue);
+	List<Movie> searchMovies(String theSearchedValue);
 
-	List<Movie> searcMoviesByImdbID(String movieId);
+	List<Movie> searchMoviesByImdbID(String movieId);
 }

@@ -44,7 +44,7 @@ public class MovieRESTClientImpl implements MovieRESTClient {
 
 				// download only if the movie doesn't exists in data base - checked by imdbID,
 				// e.g. "tt0111161"
-				if (movieDAO.searcMoviesByImdbID(imdbID).isEmpty()) {
+				if (movieDAO.searchMoviesByImdbID(imdbID).isEmpty()) {
 
 					System.out.println("\n>> Downloading movie: " + imdbID + " ...");
 					try {
@@ -82,7 +82,7 @@ public class MovieRESTClientImpl implements MovieRESTClient {
 
 		// download only if the movie doesn't exists in data base - checked by imdbID,
 		// e.g. "tt0111161"
-		if (movieDAO.searcMoviesByImdbID(imdbID).isEmpty()) {
+		if (movieDAO.searchMoviesByImdbID(imdbID).isEmpty()) {
 
 			System.out.println("\n>> Downloading movie: " + imdbID + " ...");
 			try {
@@ -105,7 +105,7 @@ public class MovieRESTClientImpl implements MovieRESTClient {
 
 		// download only if the movie doesn't exists in data base - checked by imdbID,
 		// e.g. "tt0111161"
-		if (movieDAO.searcMoviesByImdbID(imdbID).isEmpty()) {
+		if (movieDAO.searchMoviesByImdbID(imdbID).isEmpty()) {
 
 			System.out.println("\n>> Downloading movie: " + imdbID + " ...");
 			try {

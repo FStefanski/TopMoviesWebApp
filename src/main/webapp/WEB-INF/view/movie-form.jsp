@@ -41,6 +41,10 @@
 						<td><form:input path="imdbPosition" /></td>
 					</tr>
 					<tr>
+						<td><label>Imdb ID:</label></td>
+						<td><form:input path="imdbID" /></td>
+					</tr>
+					<tr>
 						<td><label>Poster URL:</label></td>
 						<td><form:input path="poster" /></td>
 					</tr>

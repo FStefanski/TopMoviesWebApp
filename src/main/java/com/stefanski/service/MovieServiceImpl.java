@@ -22,46 +22,47 @@ public class MovieServiceImpl implements MovieService {
 	@Autowired
 	private MovieDAO movieDAO;
 
-	@Transactional
+	// @Transactional
 	@Override
 	public List<Movie> getMovies() {
 		return movieDAO.getMovies();
 	}
 
-	@Transactional
+	// @Transactional
 	@Override
 	public void saveMovie(Movie theMovie) {
 		movieDAO.saveMovie(theMovie);
 	}
 
-	@Transactional
+	// @Transactional
 	@Override
 	public void saveAllMovies(List<Movie> theMoviesList) {
 		movieDAO.saveAllMovies(theMoviesList);
 	}
 
-	@Transactional
+	// @Transactional
 	@Override
 	public void deleteMovie(int theId) {
 		movieDAO.deleteMovie(theId);
 	}
 
-	@Transactional
+	// @Transactional
 	@Override
 	public Movie getMovie(int theId) {
 		return movieDAO.getMovie(theId);
 	}
 
-	@Transactional
+	// @Transactional
 	@Override
-	public List<Movie> searcMovies(String theSearchedValue) {
-		return movieDAO.searcMovies(theSearchedValue);
+	public List<Movie> searchMovies(String theSearchedValue) {
+		System.out.println("\n>> searchMovies 2.1");
+		return movieDAO.searchMovies(theSearchedValue);
 	}
 
-	@Transactional
+	// @Transactional
 	@Override
-	public List<Movie> searcMoviesByImdbID(String movieId) {
-		return movieDAO.searcMoviesByImdbID(movieId);
+	public List<Movie> searchMoviesByImdbID(String movieId) {
+		return movieDAO.searchMoviesByImdbID(movieId);
 	}
 
 }
