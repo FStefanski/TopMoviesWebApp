@@ -1,4 +1,4 @@
-package com.stefanski.dao;
+package com.stefanski.service;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.stefanski.entity.Movie;
  * @author Frederik Stefanski
  *
  */
-public interface MovieDAO {
+public interface MovieService {
 
 	List<Movie> getMovies();
 

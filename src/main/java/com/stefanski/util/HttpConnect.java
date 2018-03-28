@@ -1,5 +1,7 @@
 package com.stefanski.util;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -32,22 +34,41 @@ public class HttpConnect {
 		int connectAttemps = 101;
 		while (connectAttemps-- != 0) {
 			try {
-				HttpURLConnection con = (HttpURLConnection) url.openConnection();
-				con.setRequestProperty("User-Agent",
-						// "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
-						// Chrome/53.0.2785.143 Safari/537.36");
-						"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 OPR/50.0.2762.67");
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-				int responseCode = con.getResponseCode();
+				// setting HTTP headers
+				// e.g. connection.setRequestProperty("CustomHeader", "someValue");
+				// use Live HTTP Header to see the web browser HTTP Headers
+				connection.setRequestProperty("User-Agent",
+						"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3377.1 Safari/537.36");
+				// connection.setRequestProperty("Accept",
+				// "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8");
+				// connection.setRequestProperty("Accept-Encoding", "identity");
+				// connection.setRequestProperty("Accept-Language", "en-US,en;q=0.9");
+				// connection.setRequestProperty("Referer",
+				// "https://www.amazon.com/ref=nav_logo");
+				// connection.setRequestProperty("Upgrade-Insecure-Requests", "1");
+
+				// Accept cookies - see more
+				// https://stackoverflow.com/questions/16150089/how-to-handle-cookies-in-httpurlconnection-using-cookiemanager
+				// CookieManager cookieManager = new CookieManager();
+				// CookieHandler.setDefault(cookieManager);
+
+				int responseCode = connection.getResponseCode();
 				if (responseCode >= 200 && responseCode < 300) {
 					System.out.println("\t\t--Reading URL success " + sourceUrl);
 					System.out.println("\t>> HttpConnect --END");
-					return IOUtil.read(con.getInputStream());
+					return IOUtil.read(connection.getInputStream());
 				} else {
 					System.out.print((connectAttemps == 100)
 							? ("\t\t--Reading URL failed, response code: " + responseCode)
 							: ((connectAttemps % 20 == 0) ? (", \n\t\t\t" + responseCode) : (", " + responseCode)));
-					TimeUnit.SECONDS.sleep((long) 0.5);
+
+					try {
+						TimeUnit.SECONDS.sleep((long) 1.5);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 
 			} catch (Exception e) {

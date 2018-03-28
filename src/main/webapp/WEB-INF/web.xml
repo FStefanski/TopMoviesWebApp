@@ -11,7 +11,7 @@
 	</welcome-file-list>
 
 	<servlet>
-		<servlet-name>dispatcher</servlet-name>
+		<servlet-name>myDispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -21,7 +21,7 @@
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
+		<servlet-name>myDispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 </web-app>
