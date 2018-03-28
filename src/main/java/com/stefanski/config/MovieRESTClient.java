@@ -8,6 +8,8 @@ public interface MovieRESTClient {
 
 	List<Movie> fetchAllMovies(List<String> topMoviesIdList);
 
-	Movie fetchMovieById(String id);
+	Movie fetchMovieById(String imdbID);
+
+	Movie fetchMovieById(Integer imdbPostion, String imdbID);
 
 }

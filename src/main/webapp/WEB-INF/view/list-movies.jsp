@@ -44,7 +44,7 @@
 					<td>
 						<!--  put new button: download top movies list & data --> <input
 						type="button" value="Fetch movies list from server"
-						onclick="window.location.href='fetchTopMovieList'; return false;"
+						onclick="window.location.href='/TopMoviesWebApp/fetchMovie/fetchTopMovieList'; return false;"
 						class="add-button2" />
 					</td>
 				</tr>
@@ -83,7 +83,7 @@
 					</c:url>
 
 					<tr>
-						<td>${tempMovie.id}</td>
+						<td>${tempMovie.imdbPosition}</td>
 						<td><img SRC="${tempMovie.poster}" width="68" height="104"></td>
 						<td>${tempMovie.title}</td>
 						<td>${tempMovie.year}</td>

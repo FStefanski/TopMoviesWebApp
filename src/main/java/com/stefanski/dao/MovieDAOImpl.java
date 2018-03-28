@@ -32,7 +32,7 @@ public class MovieDAOImpl implements MovieDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		// create a query ... sort by
-		Query<Movie> theQuery = currentSession.createQuery("from Movie order by id", Movie.class);
+		Query<Movie> theQuery = currentSession.createQuery("from Movie order by imdbPosition", Movie.class);
 		// org.hibernate.query.Query hibernate 5.2
 
 		// execute query and get result list
@@ -49,8 +49,10 @@ public class MovieDAOImpl implements MovieDAO {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 
-		// save the customer
-		currentSession.saveOrUpdate(theMovie);
+		if (theMovie != null) {
+			// save the movie
+			currentSession.saveOrUpdate(theMovie);
+		}
 	}
 
 	@Transactional
@@ -81,7 +83,7 @@ public class MovieDAOImpl implements MovieDAO {
 			theQuery.setParameter("theValue", "%" + theSearchValue.toLowerCase() + "%");
 
 			if (theQuery.getResultList().isEmpty()) {
-				// save the customer
+				// save the movie
 				currentSession.saveOrUpdate(movie);
 
 				addedMoviesCounter++;
@@ -137,14 +139,14 @@ public class MovieDAOImpl implements MovieDAO {
 					"from Movie where lower(title) like :theValue " + "or year like :theValue or genre like :theValue "
 							+ "or lower(actors) like :theValue or lower(directors) like :theValue "
 							+ "or imdbRating like :theValue or userRating like :theValue "
-							+ "or lower(wantToWatch) like :theValue " + "order by id",
+							+ "or lower(wantToWatch) like :theValue " + "order by imdbPosition asc",
 					Movie.class);
 
 			theQuery.setParameter("theValue", "%" + theSearchValue.toLowerCase() + "%");
 		} else {
 
-			// if theSearchValue is empty ... get all customers as in default list
-			theQuery = currentSession.createQuery("from Movie order by id", Movie.class);
+			// if theSearchValue is empty ... get all movies as in default list
+			theQuery = currentSession.createQuery("from Movie order by imdbPosition", Movie.class);
 		}
 
 		// execute query and get result list

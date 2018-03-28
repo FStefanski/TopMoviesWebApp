@@ -23,12 +23,13 @@ DROP TABLE IF EXISTS `movie`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS `top_movies_collection`.`movie` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `imdb_position` INT  DEFAULT NULL,
   `imdb_id` VARCHAR(45)  DEFAULT NULL,
   `title` VARCHAR(255)  DEFAULT NULL,
   `year` VARCHAR(45)  DEFAULT NULL,
   `genre` VARCHAR(255)  DEFAULT NULL,
   `actors` VARCHAR(255)  DEFAULT NULL,
-  `directors` VARCHAR(45)  DEFAULT NULL,
+  `directors` VARCHAR(255)  DEFAULT NULL,
   `imdb_rating` VARCHAR(45)  DEFAULT NULL,
   `poster` VARCHAR(255)  DEFAULT NULL,
   `user_rating` VARCHAR(45)  DEFAULT NULL,

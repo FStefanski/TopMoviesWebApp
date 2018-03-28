@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.stefanski.bgjobs.TopMoviesIdFinder;
-import com.stefanski.config.MovieRESTClient;
 import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
 
@@ -102,23 +100,23 @@ public class MovieController {
 	}
 
 	/* Download top movies list & data */
-
-	// need to inject the movie finder
-	@Autowired
-	private TopMoviesIdFinder topMoviesIdFinder;
-	@Autowired
-	private MovieRESTClient movieRESTClient;
-
-	@GetMapping("/fetchTopMovieList") // only GET HTTP mapping
-	public String fetchTopMovieListFromServer(Model theModel) {
-
-		// parse the top movie list web site for actual list with movies ids
-		List<String> theMoviesIDList = topMoviesIdFinder.findAllTopMoviesId();
-
-		// use the fetched id list to consume a 3rd party REST server and fetch the
-		// movies details & save the movies using dao
-		movieDAO.saveAllMovies(movieRESTClient.fetchAllMovies(theMoviesIDList));
-
-		return "redirect:/movie/list";
-	}
+	// Moved to a independent Controller
+	// // need to inject the movie finder
+	// @Autowired
+	// private TopMoviesIdFinder topMoviesIdFinder;
+	// @Autowired
+	// private MovieRESTClient movieRESTClient;
+	//
+	// @GetMapping("/fetchTopMovieList") // only GET HTTP mapping
+	// public String fetchTopMovieListFromServer(Model theModel) {
+	//
+	// // parse the top movie list web site for actual list with movies ids
+	// List<String> theMoviesIDList = topMoviesIdFinder.findAllTopMoviesId();
+	//
+	// // use the fetched id list to consume a 3rd party REST server and fetch the
+	// // movies details & save the movies using dao
+	// movieDAO.saveAllMovies(movieRESTClient.fetchAllMovies(theMoviesIDList));
+	//
+	// return "redirect:/movie/list";
+	// }
 }

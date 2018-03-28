@@ -20,13 +20,9 @@ public class Movie {
 	@Column(name = "id") // name as in the db
 	private int id;
 
-	public String getImdbID() {
-		return imdbID;
-	}
-
-	public void setImdbID(String imdbID) {
-		this.imdbID = imdbID;
-	}
+	// Available only at imbd top movie list, check TopMoviesIdFinder Class
+	@Column(name = "imdb_position")
+	private Integer imdbPosition;
 
 	@Column(name = "imdb_id")
 	@JsonProperty("imdbID")
@@ -39,14 +35,6 @@ public class Movie {
 	@Column(name = "year")
 	@JsonProperty("Year")
 	private String year;
-
-	public String getPoster() {
-		return poster;
-	}
-
-	public void setPoster(String poster) {
-		this.poster = poster;
-	}
 
 	@Column(name = "genre")
 	@JsonProperty("Genre")
@@ -85,6 +73,22 @@ public class Movie {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Integer getImdbPosition() {
+		return imdbPosition;
+	}
+
+	public void setImdbPosition(Integer imdbPosition) {
+		this.imdbPosition = imdbPosition;
+	}
+
+	public String getImdbID() {
+		return imdbID;
+	}
+
+	public void setImdbID(String imdbID) {
+		this.imdbID = imdbID;
 	}
 
 	public String getTitle() {
@@ -151,11 +155,19 @@ public class Movie {
 		this.wantToWatch = wantToWatch;
 	}
 
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", title=" + title + ", year=" + year + ", genre=" + genre + ", actors=" + actors
-				+ ", directors=" + directors + ", imdbRating=" + imdbRating + ", userRating=" + userRating
-				+ ", wantToWatch=" + wantToWatch + "]";
+		return "Movie [id=" + id + ", imdbID=" + imdbID + ", title=" + title + ", year=" + year + ", genre=" + genre
+				+ ", actors=" + actors + ", directors=" + directors + ", imdbRating=" + imdbRating + ", poster="
+				+ poster + ", userRating=" + userRating + ", wantToWatch=" + wantToWatch + "]";
 	}
 
 }
