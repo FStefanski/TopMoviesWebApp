@@ -34,7 +34,10 @@ public class FetchMovieController {
 		// use the fetched id list to consume a 3rd party REST server
 		// AND fetch the movies details
 		// AND save the movies using service after each fetched movie
-		movieRESTService.fetchAndSaveAllMoviesOneByOne(topMoviesMap);
+		// concurrently
+		movieRESTService.fetchAndSaveAllMoviesConcurrently(topMoviesMap);
+		// or one by one
+		// movieRESTService.fetchAndSaveAllMoviesOneByOne(topMoviesMap);
 
 		return "redirect:/movie/list";
 	}

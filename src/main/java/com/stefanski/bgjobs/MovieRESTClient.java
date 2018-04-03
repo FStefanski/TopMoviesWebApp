@@ -1,12 +1,12 @@
-package com.stefanski.config;
+package com.stefanski.bgjobs;
 
-import java.util.List;
+import java.util.concurrent.Future;
 
 import com.stefanski.entity.Movie;
 
 public interface MovieRESTClient {
 
-	List<Movie> fetchAllMovies(List<String> topMoviesIdList);
+	Future<Movie> fetchMovieByIdConcurrently(Integer imdbPostion, String imdbID);
 
 	Movie fetchMovieById(String imdbID);
 

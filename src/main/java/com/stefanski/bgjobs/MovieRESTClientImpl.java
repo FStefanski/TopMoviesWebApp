@@ -1,17 +1,20 @@
-package com.stefanski.config;
+package com.stefanski.bgjobs;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Future;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.stefanski.dao.MovieDAO;
 import com.stefanski.entity.Movie;
 
+@EnableAsync
 @Component
 public class MovieRESTClientImpl implements MovieRESTClient {
 
@@ -26,52 +29,31 @@ public class MovieRESTClientImpl implements MovieRESTClient {
 	private MovieDAO movieDAO;
 
 	/* GET */
+	@Async // for more see http://www.baeldung.com/spring-async
 	@Override
-	public List<Movie> fetchAllMovies(List<String> theMoviesIDList) {
+	public Future<Movie> fetchMovieByIdConcurrently(Integer imdbPostion, String imdbID) {
 
-		List<Movie> topMoviesList = new ArrayList<>();
+		System.out.println("\t\t-- Execute method asynchronously - " + Thread.currentThread().getName());
+
 		Movie movie = null;
 
-		// movies fetched counter
-		int moviesFetchedCounter = 0;
-		// REST server limitations counter
-		int RESTServerLimitatCounter = 40;
+		try {
+			movie = restTemplate.getForObject(REST_SERVICE_URI + "{id}", Movie.class, imdbID);
+			// add imdb position to movie
+			movie.setImdbPosition(imdbPostion);
+			// return async result
+			return new AsyncResult<Movie>(movie);
+		} catch (ResourceAccessException e) {
 
-		for (String imdbID : theMoviesIDList) {
+			// java.net.ConnectException: Connection timed out: connect
+			System.out.println("\t\too Failed to fetch Movie " + imdbID);
+			// e.printStackTrace();
 
-			// restrain the number of downloaded movies - REST server limitations
-			if (--RESTServerLimitatCounter > 0) {
-
-				// download only if the movie doesn't exists in data base - checked by imdbID,
-				// e.g. "tt0111161"
-				if (movieDAO.searchMoviesByImdbID(imdbID).isEmpty()) {
-
-					System.out.println("\n>> Downloading movie: " + imdbID + " ...");
-					try {
-						movie = restTemplate.getForObject(REST_SERVICE_URI + "{id}", Movie.class, imdbID);
-					} catch (RestClientException e) {
-						e.printStackTrace();
-					}
-					topMoviesList.add(movie);
-					moviesFetchedCounter++;
-
-					try {
-						TimeUnit.MILLISECONDS.sleep(500);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-
-				} else {
-					System.out.println("\t\t-- Movie: " + imdbID + " already exists!");
-				}
-
-			} else {
-
-				break;
-			}
+		} catch (RestClientException e) {
+			e.printStackTrace();
 		}
-		System.out.println("\t\t-- Added " + moviesFetchedCounter + " of " + theMoviesIDList.size() + " movies");
-		return topMoviesList;
+
+		return null;
 	}
 
 	/* GET */
@@ -123,13 +105,4 @@ public class MovieRESTClientImpl implements MovieRESTClient {
 
 		return movie;
 	}
-
-	// public static void main(String[] args) {
-	//
-	// MovieClientImpl movieClientImpl = new MovieClientImpl();
-	//
-	// String movieId = "tt5074352";
-	// Movie movie = movieClientImpl.fetchMovieById(movieId);
-	// System.out.println(movie.toString());
-	// }
 }
