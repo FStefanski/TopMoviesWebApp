@@ -44,6 +44,12 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+		<!-- Spring Web Reactive for WebClient -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-webflux</artifactId> 
+			<version>2.0.0.RELEASE</version> </dependency> <dependency> <groupId>org.projectreactor</groupId> 
+			<artifactId>reactor-spring</artifactId> <version>1.0.1.RELEASE</version> 
+			</dependency> -->
+
 		<!-- Hibernate ORM -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -108,7 +114,7 @@
 			<version>${mysql.connector.version}</version>
 		</dependency>
 
-		<!-- Jacson JSON -->
+		<!-- Jackson JSON -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
