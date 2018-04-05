@@ -16,7 +16,8 @@
   <li>Maven - Dependency Management</li>
   
   <br>
-  <b> Demo: </b> <br>
+  <b> Demo: </b>  <br>
+ 
  ![Demo](https://github.com/FStefanski/TopMoviesWebApp/blob/master/resources/GitHub_gif/MovieApp.gif)
 
   
