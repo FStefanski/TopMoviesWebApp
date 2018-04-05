@@ -21,7 +21,7 @@
   
   <br>
   <b> Demo: </b> 
- ![Demo](https://github.com/FStefanski/TopMoviesWebApp/blob/Introducing_Unit_Tests/GitHub_gif/MovieApp.gif)
+ ![Demo](https://github.com/FStefanski/TopMoviesWebApp/blob/master/GitHub_gif/MovieApp.gif)
 
   
 
