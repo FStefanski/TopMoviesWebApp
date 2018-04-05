@@ -17,7 +17,7 @@
   
   <br>
   <b> Demo: </b>  <br>
- 
+ <br>
  ![Demo](https://github.com/FStefanski/TopMoviesWebApp/blob/master/resources/GitHub_gif/MovieApp.gif)
 
   
