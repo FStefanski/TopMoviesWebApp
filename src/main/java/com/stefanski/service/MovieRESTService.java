@@ -2,6 +2,11 @@ package com.stefanski.service;
 
 import java.util.Map;
 
+/**
+ * 
+ * @author Frederik Stefanski
+ *
+ */
 public interface MovieRESTService {
 
 	/**
