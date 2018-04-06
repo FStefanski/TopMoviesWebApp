@@ -53,16 +53,16 @@ public class MovieRESTServiceTest {
 	public void fetchAndSaveAllMoviesConcurrently_Test1() {
 		// Mapping movie imdb top movie position (key) with the imbd id (value)
 		Map<Integer, String> topMoviesMap = new TreeMap<>();
-		topMoviesMap.put(0, null);
-		topMoviesMap.put(1, "tt0092067");
-		
-		Mockito.when(topMoviesIdFinder.findAllTopMovies()).thenReturn(topMoviesMap);
 
+		Mockito.when(topMoviesIdFinder.findAllTopMovies()).thenReturn(topMoviesMap);
+		Assert.assertTrue(movieRESTServiceImpl.findAllTopMovies().isEmpty());
 	}
 
-	// demonstrates the behavior if map is empty
+	// demonstrates the behavior if map is null
 	@Test
 	public void fetchAndSaveAllMoviesConcurrently_Test2() {
 
+		Mockito.when(topMoviesIdFinder.findAllTopMovies()).thenReturn(null);
+		Assert.assertTrue(movieRESTServiceImpl.findAllTopMovies().isEmpty());
 	}
 }

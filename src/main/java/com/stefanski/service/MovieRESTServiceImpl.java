@@ -3,6 +3,7 @@ package com.stefanski.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -31,13 +32,19 @@ public class MovieRESTServiceImpl implements MovieRESTService {
 	private TopMoviesIdFinder topMoviesIdFinder;
 	@Autowired
 	private MovieRESTClient movieRESTClient;
-//	@Autowired
-//	private MovieService movieService;
+	// @Autowired
+	// private MovieService movieService;
 
 	@Override
 	public Map<Integer, String> findAllTopMovies() {
 
-		return topMoviesIdFinder.findAllTopMovies();
+		Map<Integer, String> topMoviesMap = topMoviesIdFinder.findAllTopMovies();
+
+		if (topMoviesMap == null) {
+			return topMoviesMap = new TreeMap<>();
+		} else {
+			return topMoviesMap;
+		}
 	}
 
 	@Transactional // defining transactions at Service layer
@@ -86,11 +93,11 @@ public class MovieRESTServiceImpl implements MovieRESTService {
 					try {
 						movie = theFutureMoviesList.get(futureCounter).get();
 						theMoviesList.add(movie);
-//						// save movie using Movie Service
-//						movieService.saveMovie(movie);
+						// // save movie using Movie Service
+						// movieService.saveMovie(movie);
 						// save movie using Movie MovieDAO
 						movieDAO.saveMovie(movie);
-						
+
 						// remove saved movie from the list
 						theFutureMoviesList.remove(futureCounter);
 						break;
