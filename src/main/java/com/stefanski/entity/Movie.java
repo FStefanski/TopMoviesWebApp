@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "movie")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Movie {
+public class Movie implements Comparable<Movie> {
 	// 9 inputs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,7 +66,12 @@ public class Movie {
 	public Movie() {
 
 	}
-
+	@Override
+	public int compareTo(Movie o) {
+		
+		return 0;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -257,5 +262,6 @@ public class Movie {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
+
 
 }
