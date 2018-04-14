@@ -12,7 +12,7 @@
   <li>MySQL initial data base as in script <code>TopMoviesWebApp/resources/MySQL_scripts/02-create-movie-table.sql</code></li>
   
   <br>
-  <b> Built With: </b>
+  <b> Built with: </b>
   <li>Maven - Dependency Management</li>
     
   <br>
