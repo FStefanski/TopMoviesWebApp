@@ -31,6 +31,6 @@
   <br>
   <b> Relational Database Design: </b>  <br>
   
- ![Database](https://github.com/FStefanski/TopMoviesWebApp/blob/master/resources/MySQL_scripts/topmovies_database_v2_scheme_diagram.png)
+ ![Database](https://github.com/FStefanski/TopMoviesWebApp/blob/Improving_relational_database/resources/MySQL_scripts/topmovies_database_v2_scheme_diagram.png)
   
 
