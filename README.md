@@ -9,7 +9,7 @@
   <b> Prerequisites: </b>
   <li>MySQL 6</li>
   <li>MySQL user as in script <code>TopMoviesWebApp/resources/MySQL_scripts/01-create-user.sql</code></li>
-  <li>MySQL initial data base as in script <code>TopMoviesWebApp/resources/MySQL_scripts/02-create-movie-table.sql</code></li>
+  <li>MySQL initial data base as in script <code>TopMoviesWebApp/resources/MySQL_scripts/02-create-movie-db.sql</code></li>
   
   <br>
   <b> Built with: </b>
