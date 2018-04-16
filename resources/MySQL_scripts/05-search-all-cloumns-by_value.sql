@@ -1,1 +1,0 @@
-SELECT * FROM (DESCRIBE movie) LIKE 'd%' order by id;
